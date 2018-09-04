@@ -8,14 +8,11 @@
 import Foundation
 import Surge
 
-public func argmax<T: Collection>(_ collection: T) -> T.Index where T.Element: Comparable {
-    var maxIdx = collection.indices.first!
-    for idx in collection.indices {
-        if collection[maxIdx] < collection[idx] {
-            maxIdx = idx
-        }
-    }
-    return maxIdx
+public func argmax(_ x: [Float]) -> Int{
+    var max: Float = 0.0
+    var index: vDSP_Length = vDSP_Length(0)
+    vDSP_maxvi(x, 1, &max, &index, vDSP_Length(x.count))
+    return Int(index)
 }
 
 public class SeconnTest {
